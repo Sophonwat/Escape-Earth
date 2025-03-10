@@ -1,4 +1,5 @@
 import fetch from 'node-fetch';
+import { writeFileSync } from 'fs';
 
 // API URLs and player email
 const SOLAR_SYSTEM_API = "https://api.le-systeme-solaire.net/rest/";
@@ -55,9 +56,9 @@ async function startMission() {
         console.log("Answer submitted:", answerData);
 
         // Save the skeleton key to a file named skeletonkey.txt if it exists
-        // If the response contains a skeleton key, save it to a file
         if (answerData.skeletonKey) {
-            console.log("Skeleton key:", answerData.skeletonKey);
+            writeFileSync('skeletonkey.txt', answerData.skeletonKey);
+            console.log("Skeleton key saved to skeletonkey.txt");
         }
 
         // Comment explaining the completion of the initial challenge
@@ -70,3 +71,6 @@ async function startMission() {
 
 // Start the mission
 startMission();
+
+
+//
